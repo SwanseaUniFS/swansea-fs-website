@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swansea FS Homepage</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<header>
+    <header>
   <div class="logo">
     <a href="index.html">
       <img src="images/SwanseaLogo.png" alt="Swansea FS Logo">
@@ -21,14 +20,60 @@
     <a href="news.html" class="nav-button">News</a>
     <a href="sponsors.html" class="nav-button">Sponsors</a>
     <a href="https://www.swansea.ac.uk/" class="nav-button">The University</a>
-
   </nav>
+
+
 </header>
+</head>
+
+
 <body>
-  <main>
-    <h2>Home</h2>
-    <p>Home</p>
-  </main>
+    <div class="header-sponsors">
+      <div class="sponsors-logos">
+        <div class="sponsor-logo">
+          <img src="images/EC OriginalBW.png" alt="Sponsor 1" class="bw">
+          <a href="https://www.easycomposites.co.uk/"><img src="images/EC Original.png" alt="EasyComposites" class="colorimage"></a>
+        </div>
+      </div>
+    </div>
+
+<main>
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-slide">
+        <img src="images/carousel1.jpeg" alt="Slide 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/carousel2.jpeg" alt="Slide 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/carousel3.jpeg" alt="Slide 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/carousel4.jpeg" alt="Slide 1">
+      </div>
+            <div class="carousel-slide">
+        <img src="images/carousel5.jpeg" alt="Slide 1">
+      </div>
+    </div>
+    <div class="carousel-overlay">
+      <h1>Welcome to Swansea Formula Student</h1>
+      <p>Formula Student is Europe’s leading educational motorsport competition, bringing together university teams from around the world to design, build, and race single-seat cars. <br><br>
+         </p>
+    </div>
+  </div>
+
+   <div class="content-section">
+    <h2>Who Are We?</h2>
+    <p>We are Swansea University Race Engineering, a student-led motorsport team driven by a passion for innovation and engineering excellence. Competing in the prestigious Formula Student competition, our team brings together students from diverse disciplines to design, build, and race a high-performance car. Through teamwork, creativity, and dedication, we aim to build our skills and knowledge, representing Swansea University on an international stage. </p>
+    <br>
+    <h2>What Do We Do?</h2>
+    <p>Our team designs, builds, and races a Formula Student car from the ground up, focusing on every aspect of engineering from aerodynamics and powertrain to suspension and electronics. We tackle the full lifecycle of development, from initial concept and design through to testing and competition. Alongside building a high-performance car, we develop practical skills in project management, teamwork, and problem-solving, preparing us for real-world engineering challenges </p>
+    <br>
+    <h2>Our Vision</h2>
+    <p>The Swansea University Race Engineering Team has diligently worked over the past five years to restore its pre-pandemic strength and competitiveness. As one of only three Welsh teams in the Formula Student competition, our previous absence from the track without a functioning car has only fueled our determination to excel. After successfully entering the Concept Class last year, we gained invaluable insights into design, engineering, and project management. We are now excited to implement those lessons as we transition to the Formula Student class with a fully built car this season. </p>
+</main>
+
 
   <footer class="footer">
     <div class="footer-column">
@@ -76,6 +121,34 @@
         </p>
     </div>
   </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const track = document.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const slideCount = slides.length;
+  let currentIndex = 0;
+  const intervalTime = 6000;
+  const transitionTime = 1000; // must match CSS transition 1s
+
+  function moveToNextSlide() {
+    currentIndex++;
+    track.style.transition = `transform 1s ease-in-out`;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // When reaching the duplicated slide, reset immediately
+    if (currentIndex === slideCount - 1) {
+      setTimeout(() => {
+        track.style.transition = 'none';  // remove transition
+        currentIndex = 0;                 // jump back to first real slide
+        track.style.transform = `translateX(0)`;
+      }, transitionTime);
+    }
+  }
+
+  setInterval(moveToNextSlide, intervalTime);
+});
+</script>
+
 </body>
 
 </html>
