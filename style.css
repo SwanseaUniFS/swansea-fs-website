@@ -111,7 +111,7 @@ a:hover { text-decoration: underline; color: #2382c0; }
 
 .sponsor-btn {
   margin-top: 25px;
-  background-color: #2382c0; /* Swansea red accent */
+  background-color: #2382c0; 
   color: #fff;
   padding: 12px 30px;
   border: none;
@@ -120,7 +120,7 @@ a:hover { text-decoration: underline; color: #2382c0; }
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
-  pointer-events: auto; /* enables clicking despite overlay pointer-events: none */
+  pointer-events: auto; 
 }
 
 .sponsor-btn:hover {
