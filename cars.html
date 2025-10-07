@@ -40,10 +40,158 @@
 		</div>
 	</div>
 	<main>
+<script>
+(function(){
+  const placeholder = 'images/SwanseaLogoCar.png'; // can be data URI too
+  const placeholderUrl = new URL(placeholder, location.href).href;
+
+  function install(img){
+    // attach a single error handler that won't loop if the placeholder fails
+    function onError(){
+      if (img.src === placeholderUrl) { // already using placeholder -> stop
+        img.removeEventListener('error', onError);
+        return;
+      }
+      img.removeEventListener('error', onError);
+      img.src = placeholder;
+    }
+    img.addEventListener('error', onError);
+ 
+    // if no src attribute or empty, set placeholder immediately
+    const attr = img.getAttribute('src');
+    if (!attr || attr.trim() === '') {
+      img.src = placeholder;
+      return;
+    }
+
+    // If image already finished loading but is broken (naturalWidth === 0)
+    if (img.complete) {
+      if (img.naturalWidth === 0 && img.src !== placeholderUrl) img.src = placeholder;
+    } else {
+      // if it loads but naturalWidth is 0, swap to placeholder
+      img.addEventListener('load', () => {
+        if (img.naturalWidth === 0 && img.src !== placeholderUrl) img.src = placeholder;
+      });
+    }
+  }
+
+  // Wait for DOM so images exist
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.car-card img').forEach(install);
+  });
+})();
+</script>
+
+
    <div class="content-section">
     <h1>Cars</h1>
-    <p></p>
-    
+<div class="car-grid">
+  <div class="car-card">
+    <div class="year-badge">2026</div>
+    <img src="images/Swansea Cars/S26.jpg" alt="Car 2026">
+  </div>
+  <div class="car-card">
+    <div class="year-badge">2025</div>
+    <img src="images/Swansea Cars/S25.jpg" alt="Car 2025">
+  </div>
+  <div class="car-card">
+    <div class="year-badge">2024</div>
+    <img src="" alt="Car 2024"> 
+  </div>
+  <div class="car-card">
+    <div class="year-badge">2023</div>
+    <img src="images/Swansea Cars/S23.jpg" alt="Car 2023">
+  </div>
+  <div class="car-card">
+	<div class="year-badge">2022</div>
+	<img src="" alt="Car 2022">
+	  </div>
+  <div class="car-card">
+	<div class="year-badge">2021</div>
+	<img src="images/Swansea Cars/S21.jpg" alt="Car 2021">
+	  </div>
+  <div class="car-card">
+	<div class="year-badge">2020</div>
+	<img src="" alt="Car 2020">
+  </div>
+    <div class="car-card">
+	<div class="year-badge">2019</div>
+	<img src="images/Swansea Cars/S19.jpg" alt="Car 2019">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2018</div>
+	<img src="images/Swansea Cars/S18.jpg" alt="Car 2018">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2017</div>
+	<img src="images/Swansea Cars/S17.jpg" alt="Car 2017">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2016</div>
+	<img src="" alt="Car 2016">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2015</div>
+	<img src="images/Swansea Cars/S16.jpg" alt="Car 2015">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2014</div>
+	<img src="images/Swansea Cars/S15.jpg" alt="Car 2014">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2013</div>
+	<img src="images/Swansea Cars/S14.png" alt="Car 2013">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2012</div>
+	<img src="images/Swansea Cars/S12.jpg" alt="Car 2012">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2011</div>
+	<img src="images/Swansea Cars/S11.jpg" alt="Car 2011">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2010</div>
+	<img src="images/Swansea Cars/S10.jpg" alt="Car 2010">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2009</div>
+	<img src="images/Swansea Cars/S09.jpg" alt="Car 2009">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2008</div>
+	<img src="images/Swansea Cars/S08.jpg" alt="Car 2008">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2007</div>
+	<img src="images/Swansea Cars/S07.jpg" alt="Car 2007">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2006</div>
+	<img src="images/Swansea Cars/S06.jpg" alt="Car 2006">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2005</div>
+	<img src="images/Swansea Cars/S05.jpg" alt="Car 2005">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2004</div>
+	<img src="images/Swansea Cars/S04.jpg" alt="Car 2004">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2003</div>
+	<img src="images/Swansea Cars/S03.jpg" alt="Car 2003">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2002</div>
+	<img src="images/Swansea Cars/S02.jpg" alt="Car 2002">
+	  </div>
+	    <div class="car-card">
+	<div class="year-badge">2001</div>
+	<img src="images/Swansea Cars/S01.jpg" alt="Car 2001">
+	  </div>
+</main>
+
   </div>
         
 	</main>
