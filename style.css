@@ -128,7 +128,6 @@ a:hover { text-decoration: underline; color: #2382c0; }
   transform: scale(1.05);
 }
 
-/* CAR GRID STYLES */
 .car-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -140,19 +139,19 @@ a:hover { text-decoration: underline; color: #2382c0; }
   position: relative;
   overflow: hidden;
   border-radius: 15px;
-  aspect-ratio: 16 / 9; /* keeps consistent box shape */
+  aspect-ratio: 16 / 9;
   background-color: #f0f0f0;
 }
 
 .car-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ensures images fill the box without distortion */
+  object-fit: cover;
   transition: transform 0.4s ease;
 }
 
 .car-card:hover img {
-  transform: scale(1.05); /* slight zoom on hover */
+  transform: scale(1.05);
 }
 
 .year-badge {
@@ -201,8 +200,8 @@ a:hover { text-decoration: underline; color: #2382c0; }
 
 .content-section-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
-    gap: 40px;                             /* Space between columns */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 40px;                             
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -217,7 +216,7 @@ a:hover { text-decoration: underline; color: #2382c0; }
 
 .content-section-grid model-viewer {
     width: 100%;
-    max-width: 100%;  /* fills left column */
+    max-width: 100%;  
     height: 300px;
 }
 
