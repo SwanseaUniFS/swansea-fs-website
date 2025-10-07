@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<title>Swansea FS Homepage</title>
-	<link href="style.css" rel="stylesheet">
-	<link href="images/" rel="icon" type="image/x-icon">
-	<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Swansea FS</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<header>
-		<div class="logo">
-			<a href="index.html"><img alt="Swansea FS Logo" src="images/SwanseaLogo.png"></a>
-		</div><a class="contact-btn" href="contact.html">Contact Us</a>
-		<nav class="nav">
-			<a class="nav-button" href="index.html">Home</a> <a class="nav-button" href="project.html">Project</a> <a class="nav-button" href="team.html">Team</a> <a class="nav-button" href="cars.html">Cars</a> <a class="nav-button" href="news.html">News</a> <a class="nav-button" href="sponsors.html">Sponsors</a> <a class="nav-button" href="https://www.swansea.ac.uk/">The University</a>
-		</nav>
-	</header>
-	<div class="header-sponsors">
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="images/SwanseaLogo.png" alt="Swansea FS Logo" /></a>
+    </div>
+    <a class="contact-btn" href="contact.html">Contact Us</a>
+    <nav class="nav">
+      <a href="index.html" class="nav-button">Home</a>
+      <a href="project.html" class="nav-button">Project</a>
+      <a href="team.html" class="nav-button">Team</a>
+      <a href="cars.html" class="nav-button">Cars</a>
+      <a href="news.html" class="nav-button">News</a>
+      <a href="sponsors.html" class="nav-button">Sponsors</a>
+      <a href="https://www.swansea.ac.uk/" class="nav-button">The University</a>
+    </nav>
+  </header>
+<div class="header-sponsors">
 		<div class="sponsors-logos">
 			<div class="sponsor-logo">
 				<img alt="EasyComposites BW" class="bw" src="images/EC%20OriginalBW.png"> <a aria-label="EasyComposites" href="https://www.easycomposites.co.uk/"><img alt="EasyComposites" class="colorimage" src="images/EC%20Original.png"></a>
@@ -39,15 +44,47 @@
 			</div>
 		</div>
 	</div>
-	<main>
-   <div class="content-section">
+<main>
+  <div class="content-section">
     <h1>Contact Us</h1>
-    <p></p>
-    
+    <p>If you have any questions or would like to get in touch with Swansea University Racing, please fill out the form below.</p>
+
+    <form 
+      id="contactForm" 
+      action="https://formspree.io/f/YOUR_FORM_ID" 
+      method="POST" 
+      class="contact-form"
+    >
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="organization">Your Organization</label>
+      <input type="text" id="organization" name="organization" placeholder="Optional" />
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <div style="display:none;">
+        <label>Leave this field empty:</label>
+        <input type="text" name="_honeypot" />
+      </div>
+
+      <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <p id="formMessage" class="form-message"></p>
   </div>
-        
-	</main>
-	<footer class="footer">
+</main>
+
+<footer class="footer">
 		<div class="footer-column">
 		<h3></h3><img alt="Swansea Uni Logo" class="unilogo" src="images/Swansea.png">
     <h3></h3><img alt="Swansea Uni Logo" class="unilogo" src="images/SURElogo.png"></div>
@@ -95,5 +132,42 @@
 			United Kingdom</p>
 		</div>
 	</footer>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+  
+<script>
+  const form = document.getElementById('contactForm');
+  const message = document.getElementById('formMessage');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (form.querySelector('[name="_honeypot"]').value) {
+      message.textContent = "Spam detected. Submission blocked.";
+      message.classList.add("error");
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      message.textContent = "Your message has been sent successfully!";
+      message.classList.remove("error");
+      form.reset();
+      grecaptcha.reset();
+    } else {
+      message.textContent = "There was an error. Please try again later.";
+      message.classList.add("error");
+    }
+  });
+</script>
 </body>
 </html>
