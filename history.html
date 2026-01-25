@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swansea Formula Student — History</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lenis (smooth scrolling) - primary CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  </head>
+
+  <body>
+    <header id="header">
+      <div class="container">
+        <div class="header-wrapper">
+          <div class="logo">
+            <a href="/index.html" aria-label="Home">
+              <svg viewBox="0 0 257 143" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Swansea University">
+                <image href="public/logo.png" width="257" height="143" preserveAspectRatio="xMidYMid meet" />
+              </svg>
+            </a>
+          </div>
+
+          <nav>
+            <ul class="navbar-nav">
+              <li class="nav-item"><a href="/car.html" class="nav-link">The Car</a></li>
+              <li class="nav-item"><a href="/history.html" class="nav-link">History</a></li>
+              <li class="nav-item"><a href="/team.html" class="nav-link">Team</a></li>
+              <li class="nav-item"><a href="/sponsors.html" class="nav-link">Sponsors</a></li>
+              <li class="nav-item"><a href="/gallery.html" class="nav-link">Gallery</a></li>
+              <li class="nav-item"><a href="/join-us.html" class="nav-link">Join Us</a></li>
+            </ul>
+          </nav>
+
+          <div id="mobile-menu-toggle" aria-label="Toggle menu">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================
+         HISTORY CONTENT
+    ========================== -->
+    <main class="history-page">
+      <div class="container">
+        <div class="history-hero">
+          <h2 class="history-title">Our History</h2>
+          <p class="history-subtitle">
+            Scroll through our cars from <strong>2026</strong> back to <strong>2001</strong>.
+            Each year shows the car image, competitions attended, and world rank.
+          </p>
+        </div>
+
+        <section class="timeline" id="timeline">
+          <div class="timeline-line" aria-hidden="true">
+            <div class="timeline-line-fill" id="timelineFill"></div>
+          </div>
+
+          <!-- Items injected by JS -->
+          <div id="timelineItems"></div>
+        </section>
+
+        <p class="history-footnote">
+          To <strong>skip a year</strong> (e.g. <code>2003</code>), remove that entry from
+          <code>timelineData</code> in the script.
+        </p>
+      </div>
+
+      <!-- ✅ Floating controls (now fixed, not sticky) -->
+      <div class="history-controls" aria-label="Timeline controls">
+        <label class="history-control">
+          <span>Jump to year</span>
+          <select id="yearJump" aria-label="Jump to year"></select>
+        </label>
+        <button class="history-control-btn" id="scrollTopBtn" type="button" aria-label="Back to top">
+          ↑ Top
+        </button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-column">
+        <h3></h3>
+        <img alt="Swansea Uni Logo" class="unilogo" src="public/Swansea.png" />
+        <h3></h3>
+        <img alt="Swansea Uni Logo" class="unilogo" src="public/SURElogo.png" />
+      </div>
+
+      <div class="footer-column">
+        <h3>Links</h3>
+        <p>
+          <a href="index.html">Home</a><br />
+          <a href="car.html">The Car</a><br />
+          <a href="history.html">History</a><br />
+          <a href="team.html">Team</a><br />
+          <a href="sponsors.html">Sponsors</a><br />
+          <a href="gallery.html">Gallery</a><br />
+          <a href="https://www.swansea.ac.uk/">The University</a>
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <p>
+          Email:
+          <a href="mailto:swanseauniracing@gmail.com">swanseauniracing@gmail.com</a><br /><br />
+          Bay Campus<br />
+          Fabian Way<br />
+          Swansea<br />
+          SA1 8EN<br />
+          United Kingdom
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // ===== Mobile menu =====
+      document.addEventListener("DOMContentLoaded", () => {
+        const header = document.getElementById("header");
+        const toggle = document.getElementById("mobile-menu-toggle");
+        const navLinks = header.querySelectorAll("nav a");
+        if (!header || !toggle) return;
+
+        const openMenu = () => {
+          header.classList.add("mobile-menu-opened");
+          toggle.classList.add("toggled");
+          document.documentElement.classList.add("no-scroll");
+          toggle.setAttribute("aria-expanded", "true");
+        };
+
+        const closeMenu = () => {
+          header.classList.remove("mobile-menu-opened");
+          toggle.classList.remove("toggled");
+          document.documentElement.classList.remove("no-scroll");
+          toggle.setAttribute("aria-expanded", "false");
+        };
+
+        const isOpen = () => header.classList.contains("mobile-menu-opened");
+
+        toggle.setAttribute("role", "button");
+        toggle.setAttribute("tabindex", "0");
+        toggle.setAttribute("aria-expanded", "false");
+
+        toggle.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isOpen() ? closeMenu() : openMenu();
+        });
+
+        toggle.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            isOpen() ? closeMenu() : openMenu();
+          }
+          if (e.key === "Escape") closeMenu();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeMenu();
+        });
+
+        navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 768) closeMenu();
+        });
+      });
+
+      // ===== History Timeline + Lenis (with fallback loader) =====
+      document.addEventListener("DOMContentLoaded", async () => {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // --- Lenis loader with fallback ---
+        async function ensureLenisLoaded() {
+          if (prefersReducedMotion) return false;
+          if (window.Lenis) return true;
+
+          // If jsDelivr failed or Lenis isn't present, try unpkg automatically
+          await new Promise((resolve) => {
+            const s = document.createElement("script");
+            s.src = "https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js";
+            s.async = true;
+            s.onload = () => resolve(true);
+            s.onerror = () => resolve(false);
+            document.head.appendChild(s);
+          });
+
+          return !!window.Lenis;
+        }
+
+        const hasLenis = await ensureLenisLoaded();
+
+        const lenis = hasLenis
+          ? new Lenis({
+              duration: 1.15,
+              easing: (t) => 1 - Math.pow(1 - t, 3),
+              smoothWheel: true,
+              smoothTouch: false,
+              wheelMultiplier: 1,
+              touchMultiplier: 1,
+            })
+          : null;
+
+        // RAF loop (Lenis needs this)
+        function raf(time) {
+          if (lenis) lenis.raf(time);
+          updateFill();
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        /**
+         * EDIT THIS ARRAY:
+         * - Add real images + stats
+         * - To SKIP a year (e.g. 2003) just remove that object
+         */
+        const timelineData = [
+          { year: 2026, carName: "SR-26 (Placeholder)", image: "public/cars/2026.jpg", competitions: ["FS UK", "FS Germany"], worldRank: 42, notes: "New aero package and lightweight chassis iteration." },
+          { year: 2025, carName: "SR-25 (Placeholder)", image: "public/cars/2025.jpg", competitions: ["FS UK"], worldRank: 55, notes: "Focus on reliability and manufacturability improvements." },
+          { year: 2024, carName: "SR-24 (Placeholder)", image: "public/cars/2024.jpg", competitions: ["FS UK", "FS Austria"], worldRank: 61, notes: "Powertrain upgrades with improved cooling performance." },
+          // ...
+          { year: 2002, carName: "SR-02 (Placeholder)", image: "public/cars/2002.jpg", competitions: ["FS UK"], worldRank: null, notes: "Early platform development." },
+          { year: 2001, carName: "SR-01 (Placeholder)", image: "public/cars/2001.jpg", competitions: ["FS UK"], worldRank: null, notes: "First-year entry and team foundations." },
+        ].sort((a, b) => b.year - a.year);
+
+        const itemsRoot = document.getElementById("timelineItems");
+        const yearJump = document.getElementById("yearJump");
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        const fillEl = document.getElementById("timelineFill");
+        const timelineEl = document.getElementById("timeline");
+
+        // Build timeline DOM (uniform cards)
+        itemsRoot.innerHTML = timelineData
+          .map((d) => {
+            const comps = (d.competitions || []).map((c) => `<span class="pill">${escapeHtml(c)}</span>`).join("");
+            const rank = d.worldRank == null ? "—" : `#${d.worldRank}`;
+
+            return `
+              <article class="timeline-item" id="year-${d.year}" data-year="${d.year}">
+                <div class="timeline-dot" aria-hidden="true"></div>
+
+                <div class="timeline-card">
+                  <div class="timeline-head">
+                    <div class="timeline-year">${d.year}</div>
+                    <div class="timeline-carname">${escapeHtml(d.carName || "")}</div>
+                  </div>
+
+                  <div class="timeline-media">
+                    <img src="${escapeAttr(d.image)}" alt="${escapeAttr(`Car from ${d.year}`)}" loading="lazy" />
+                  </div>
+
+                  <div class="timeline-info">
+                    <div class="info-row">
+                      <span class="info-label">Competitions</span>
+                      <span class="info-value pills">${comps || "<span class='muted'>—</span>"}</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">World Rank</span>
+                      <span class="info-value">${rank}</span>
+                    </div>
+                  </div>
+
+                  ${d.notes ? `<p class="timeline-notes">${escapeHtml(d.notes)}</p>` : `<p class="timeline-notes muted">—</p>`}
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+
+        // Populate jump dropdown
+        yearJump.innerHTML = timelineData.map((d) => `<option value="${d.year}">${d.year}</option>`).join("");
+
+        // Jump-to-year (Lenis-aware)
+        yearJump.addEventListener("change", (e) => {
+          const y = e.target.value;
+          const target = document.getElementById(`year-${y}`);
+          if (!target) return;
+
+          if (lenis) lenis.scrollTo(target, { offset: -120, duration: 1.0 });
+          else target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        // Back to top (Lenis-aware)
+        scrollTopBtn.addEventListener("click", () => {
+          if (lenis) lenis.scrollTo(0, { duration: 1.0 });
+          else window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Reveal animation (add .is-visible on card)
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const card = entry.target.querySelector(".timeline-card");
+                if (card) card.classList.add("is-visible");
+              }
+            });
+          },
+          { threshold: 0.22 }
+        );
+        document.querySelectorAll(".timeline-item").forEach((el) => io.observe(el));
+
+        // Timeline fill progress
+        const clamp01 = (n) => Math.max(0, Math.min(1, n));
+        function updateFill() {
+          if (!fillEl || !timelineEl) return;
+
+          const rect = timelineEl.getBoundingClientRect();
+          const viewportH = window.innerHeight || document.documentElement.clientHeight;
+
+          const start = viewportH * 0.15;
+          const end = viewportH * 0.85;
+
+          const total = rect.height - (end - start);
+          const scrolled = start - rect.top;
+
+          const p = total > 0 ? clamp01(scrolled / total) : 0;
+          fillEl.style.height = `${p * 100}%`;
+        }
+
+        window.addEventListener("resize", updateFill);
+
+        // Helpers
+        function escapeHtml(str) {
+          return String(str)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+        }
+        function escapeAttr(str) {
+          return escapeHtml(str).replaceAll("`", "&#096;");
+        }
+      });
+    </script>
+  </body>
+</html>
