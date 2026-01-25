@@ -377,6 +377,266 @@ header nav .nav-item:last-child .nav-link:hover::before {
 }
 
 /* =========================
+   Banner
+========================= */
+.header-banner {
+  max-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+.header-banner img {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+@media (min-width: 768px) {
+  .header-banner img {
+    height: 50vw;
+  }
+}
+.header-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #000, transparent 40%);
+}
+
+/* =========================
+   Sections
+========================= */
+.page-formula2 {
+  position: relative;
+  margin-bottom: -160px;
+}
+@media (min-width: 768px) {
+  .page-formula2 {
+    top: -180px;
+  }
+}
+
+.page-formula2 section.section-1 {
+  background: linear-gradient(90deg, transparent 50%, #000 0);
+}
+.page-formula2 section.section-1 .container {
+  background-color: #000;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .page-formula2 section.section-1 .expertise {
+    display: flex;
+    gap: 62px;
+  }
+}
+
+.page-formula2 section.section-1 .block-left {
+  padding-top: 60px;
+}
+
+/* ✅ Mobile: center the hero text + keep margins */
+@media (max-width: 767px) {
+  .page-formula2 section.section-1 .block-left {
+    text-align: center;
+  }
+  .page-formula2 section.section-1 .description {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 42ch;
+  }
+}
+
+@media (min-width: 768px) {
+  .page-formula2 section.section-1 .block-left {
+    width: 50%;
+    padding-left: 40px;
+    text-align: left;
+  }
+}
+
+.page-formula2 section.section-1 .description {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.page-formula2 section.section-1 .controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.page-formula2 section.section-1 .block-right {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .page-formula2 section.section-1 .block-right {
+    width: 50%;
+  }
+}
+
+.page-formula2 section.section-1 .img-wrapper {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+}
+.page-formula2 section.section-1 .img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Countdown */
+#countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(15px, 3vw, 40px);
+  margin-top: 25px;
+  pointer-events: none;
+}
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.countdown-item span {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(35, 130, 192, 0.8);
+}
+.countdown-item p {
+  margin: 5px 0 0;
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: #ddd;
+}
+
+/* Title */
+.title h2 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* =========================
+   ✅ Our Partners (responsive + centered)
+========================= */
+.partners-section {
+  padding: clamp(28px, 4vw, 56px) 0;
+}
+
+/* Grid that centers and wraps nicely */
+.partners-section .sponsors-logos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2.5vw, 22px);
+  align-items: center;
+  justify-items: center;
+
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 0 0;
+}
+
+/* 3 across on small tablets */
+@media (min-width: 560px) {
+  .partners-section .sponsors-logos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 4 across on desktop */
+@media (min-width: 900px) {
+  .partners-section .sponsors-logos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Logo “card” */
+.partners-section .sponsor-logo {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  height: clamp(86px, 12vw, 120px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  overflow: hidden;
+}
+
+/* Accessible focus ring */
+.partners-section .sponsor-logo:focus-within {
+  outline: 2px solid rgba(35, 130, 192, 0.75);
+  outline-offset: 3px;
+}
+
+/* Full clickable area */
+.partners-section .sponsor-logo > a {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* Keep images centered */
+.partners-section .sponsor-logo img {
+  max-width: 78%;
+  max-height: 70%;
+  width: auto;
+  height: auto;
+
+  transition: opacity 200ms ease, transform 200ms ease;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Hover swap (BW -> Color) */
+.partners-section .sponsor-logo .colorimage {
+  opacity: 0;
+  z-index: 2;
+}
+.partners-section .sponsor-logo .bw {
+  opacity: 1;
+  z-index: 1;
+}
+
+@media (hover: hover) {
+  .partners-section .sponsor-logo:hover {
+    transform: translateY(-2px);
+    border-color: rgba(35, 130, 192, 0.35);
+    box-shadow: 0 0 22px rgba(35, 130, 192, 0.18);
+  }
+  .partners-section .sponsor-logo:hover .colorimage {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+  .partners-section .sponsor-logo:hover .bw {
+    opacity: 0;
+  }
+}
+
+/* Touch devices: don't hide the color version on tap-only screens */
+@media (hover: none) {
+  .partners-section .sponsor-logo .colorimage {
+    opacity: 1;
+  }
+  .partners-section .sponsor-logo .bw {
+    opacity: 0;
+  }
+}
+
+/* =========================
    Footer
 ========================= */
 .footer {
@@ -414,193 +674,497 @@ header nav .nav-item:last-child .nav-link:hover::before {
     margin: 10px 0;
   }
 }
-
-
 /* =========================
-   HISTORY TIMELINE FIXES (uniform cards + floating controls)
-   Paste at very bottom of styles.css
+   TEAM GRID (add-only)
 ========================= */
-
 :root {
   --brand-blue: #2382c0;
 }
 
-/* Floating controls (fixed bottom-right) */
-.history-controls {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 9999;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-
-  padding: 12px;
-  border-radius: 18px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
+/* Optional: section spacing on the team page */
+.team-section {
+  padding: clamp(28px, 5vw, 70px) 0;
 }
 
-.history-control {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.history-control span {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.history-control select {
-  appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.35);
-  color: #fff;
-  border-radius: 12px;
-  padding: 10px 36px 10px 12px;
-  font-weight: 800;
-  cursor: pointer;
-  outline: none;
-  min-width: 110px;
-}
-
-.history-control select:focus {
-  border-color: rgba(35, 130, 192, 0.55);
-  box-shadow: 0 0 0 3px rgba(35, 130, 192, 0.18);
-}
-
-.history-control-btn {
-  appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-}
-
-@media (hover: hover) {
-  .history-control-btn:hover {
-    transform: translateY(-2px);
-    border-color: rgba(35, 130, 192, 0.35);
-    box-shadow: 0 0 18px rgba(35, 130, 192, 0.18);
-  }
-}
-
-/* Ensure content doesn't sit under fixed controls on tiny screens */
-@media (max-width: 600px) {
-  .history-controls {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    justify-content: space-between;
-  }
-}
-
-/* Pills + muted helpers */
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  max-height: 72px;     /* prevents cards from growing */
-  overflow: hidden;      /* keeps all cards same height */
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  font-size: 0.82rem;
+/* Title like your screenshot */
+.team-title h2 {
+  text-align: center;
+  letter-spacing: 4px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.92);
-  white-space: nowrap;
+  font-size: clamp(28px, 4vw, 46px);
+  margin: 10px 0 34px;
 }
 
-.muted {
-  color: rgba(255, 255, 255, 0.6);
+/* Responsive grid:
+   1 col phone, 2 col small, 3 col tablet, 4 col desktop */
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(18px, 2.6vw, 28px);
+  align-items: start;
 }
 
-/* Uniform card sizing */
-.timeline-card {
-  width: min(540px, 100%);
-  height: clamp(430px, 46vw, 520px); /* ✅ all cards same height */
+@media (min-width: 560px) {
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1150px) {
+  .team-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.team-card {
   display: flex;
   flex-direction: column;
 }
 
-.timeline-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.timeline-year {
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-size: 1.05rem;
-}
-
-.timeline-carname {
-  font-weight: 800;
-  font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.75);
-  text-align: right;
-}
-
-/* Make image area consistent so cards don't resize */
-.timeline-media {
-  flex: 0 0 auto;
-  aspect-ratio: 16 / 9;
-}
-
-/* Keep info consistent */
-.timeline-info {
-  flex: 0 0 auto;
-}
-
-/* Notes uses remaining space (and clamps) */
-.timeline-notes {
-  margin-top: 10px;
-  flex: 1 1 auto;
+/* Blue square behind PNG headshots */
+.team-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--brand-blue);
+  border-radius: 0px; /* set to 16px if you prefer rounded */
   overflow: hidden;
+  display: grid;
+  place-items: center;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 3;  /* clamps long notes to keep same height */
-  -webkit-box-orient: vertical;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
 }
 
-/* Extra smoothness hints */
-.timeline-card,
-.timeline-dot,
-.timeline-line-fill {
-  will-change: transform, opacity;
-}
-.timeline-media img {
-  will-change: transform;
+/* PNG stays centred and clean */
+.team-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;      /* fills the square */
+  object-position: center !important;
+  filter: none !important;           /* optional: remove shadow if you want cleaner edges */
 }
 
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce) {
-  .history-controls,
-  .timeline-card,
-  .history-control-btn {
-    transition: none !important;
+
+/* Name + role */
+.team-name {
+  margin-top: 20px; /* was larger before */
+  margin: 14px 0 0;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.team-role {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Extra info list */
+.team-meta {
+  margin: 12px 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.team-meta-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+
+.team-meta dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 700;
+}
+
+.team-meta dd {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 500;
+}
+
+/* Subtle hover */
+@media (hover: hover) {
+  .team-photo {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+  .team-card:hover .team-photo {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.45);
   }
 }
+/* === HARD RESET spacing under team image === */
+.team-photo {
+  margin-bottom: 0 !important;
+}
+
+.team-card h3,
+.team-name {
+  margin-top: 4px !important;
+  margin-bottom: 0 !important;
+  line-height: 1.15;
+}
+
+.team-role {
+  margin-top: 2px !important;
+}
+/* === Remove any border/gap inside the blue team square === */
+.team-photo {
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+.team-photo img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+/* =========================
+   GALLERY (Instagram grid + Load More)
+   Paste at bottom of styles.css
+========================= */
+
+/* Keeps content below your fixed header */
+.gallery-page {
+  padding-top: clamp(110px, 16vw, 150px);
+  padding-bottom: clamp(40px, 7vw, 80px);
+}
+
+/* Title styling to match your vibe */
+.gallery-title {
+  text-align: center;
+  letter-spacing: 4px;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 46px);
+  margin: 0 0 clamp(22px, 4vw, 40px);
+}
+
+/* Grid: 1 col phone, 2 col tablet, 3 col desktop */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(14px, 2vw, 22px);
+}
+
+@media (min-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tile */
+.gallery-item {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Instagram square look */
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+/* Image fills tile */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform 240ms ease, filter 240ms ease;
+}
+
+/* Hover effect */
+@media (hover: hover) {
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(35, 130, 192, 0.35);
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.48);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.05);
+    filter: contrast(1.02) saturate(1.05);
+  }
+  /* subtle overlay */
+  .gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.32), rgba(0,0,0,0));
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+  }
+  .gallery-item:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Hidden items for "Load more" */
+.gallery-item.is-hidden {
+  display: none;
+}
+
+/* Button area */
+.gallery-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(22px, 4vw, 36px);
+}
+
+/* Load more button */
+.gallery-load-more {
+  appearance: none;
+  border: 2px solid #2382c0;
+  background: transparent;
+  color: #2382c0;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+@media (hover: hover) {
+  .gallery-load-more:hover {
+    transform: translateY(-2px);
+    background: #2382c0;
+    color: #000;
+    box-shadow: 0 0 18px rgba(35, 130, 192, 0.35);
+  }
+}
+
+.gallery-load-more:active {
+  transform: translateY(0);
+}
+/* =========================
+   HISTORY TIMELINE (paste at bottom)
+========================= */
+
+.history-page {
+  padding-top: clamp(110px, 16vw, 150px); /* space under fixed header */
+  padding-bottom: clamp(50px, 7vw, 90px);
+}
+
+.history-hero {
+  text-align: center;
+  margin-bottom: clamp(22px, 4vw, 38px);
+}
+
+.history-title {
+  letter-spacing: 4px;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 46px);
+  margin: 0 0 10px;
+}
+
+.history-subtitle {
+  margin: 0 auto;
+  max-width: 70ch;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+}
+
+.history-footnote {
+  margin-top: 26px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.95rem;
+}
+.history-footnote code {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Timeline container */
+.timeline {
+  position: relative;
+  padding: 10px 0;
+}
+
+/* The center line (sticky feeling) */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* The “fill” that grows as you scroll */
+.timeline-line-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background: #2382c0;
+  box-shadow: 0 0 18px rgba(35, 130, 192, 0.35);
+}
+
+/* Each item */
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr; /* left | line | right */
+  align-items: start;
+  padding: clamp(16px, 2.4vw, 24px) 0;
+}
+
+/* Dot on the line */
+.timeline-dot {
+  grid-column: 2;
+  justify-self: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #2382c0;
+  box-shadow: 0 0 0 6px rgba(35, 130, 192, 0.18);
+  margin-top: 18px;
+}
+
+/* Card */
+.timeline-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  padding: 14px;
+  max-width: 520px;
+}
+
+/* Alternate left/right on desktop */
+.timeline-item:nth-child(odd) .timeline-card {
+  grid-column: 1;
+  justify-self: end;
+  margin-right: 10px;
+}
+.timeline-item:nth-child(even) .timeline-card {
+  grid-column: 3;
+  justify-self: start;
+  margin-left: 10px;
+}
+
+/* Year label */
+.timeline-year {
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+/* Image */
+.timeline-media {
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.timeline-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Info rows */
+.timeline-info {
+  display: grid;
+  gap: 8px;
+}
+.info-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.info-label {
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+}
+.info-value {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.timeline-notes {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
+
+/* Hover polish */
+@media (hover: hover) {
+  .timeline-card {
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .timeline-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(35, 130, 192, 0.35);
+    box-shadow: 0 26px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Mobile: single column, line on the left */
+@media (max-width: 900px) {
+  .timeline-line {
+    left: 18px;
+    transform: none;
+  }
+
+  .timeline-item {
+    grid-template-columns: 40px 1fr;
+    padding: 18px 0;
+  }
+
+  .timeline-dot {
+    grid-column: 1;
+    justify-self: center;
+    margin-top: 20px;
+  }
+
+  .timeline-item .timeline-card {
+    grid-column: 2;
+    justify-self: stretch;
+    max-width: 100%;
+    margin: 0 0 0 10px;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-card,
+  .timeline-item:nth-child(even) .timeline-card {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+}
+  
