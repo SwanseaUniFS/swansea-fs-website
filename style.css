@@ -963,18 +963,37 @@ header nav .nav-item:last-child .nav-link:hover::before {
 .gallery-load-more:active {
   transform: translateY(0);
 }
+
 /* =========================
-   HISTORY TIMELINE (paste at bottom)
+   HISTORY TIMELINE (OVERLAPPING + STAGGERED)
+   Replace your entire timeline CSS with this block
 ========================= */
 
+:root {
+  --brand-blue: #2382c0;
+
+  /* horizontal layout */
+  --timeline-center: 72px;     /* width of the center column */
+  --timeline-gutter: 18px;     /* gap from center line to card */
+
+  /* card sizing */
+  --timeline-card-max: 520px;
+  --timeline-card-min: 300px;
+
+  /* ✅ vertical spacing / overlap controls */
+  --timeline-item-pad-y: 2px;      /* base vertical padding per item (smaller = closer) */
+  --timeline-overlap: 220px;        /* how much each card overlaps the previous one */
+}
+
+/* page spacing */
 .history-page {
-  padding-top: clamp(110px, 16vw, 150px); /* space under fixed header */
-  padding-bottom: clamp(50px, 7vw, 90px);
+  padding-top: clamp(110px, 16vw, 150px);
+  padding-bottom: clamp(40px, 6vw, 70px);
 }
 
 .history-hero {
   text-align: center;
-  margin-bottom: clamp(22px, 4vw, 38px);
+  margin-bottom: clamp(14px, 2.8vw, 26px);
 }
 
 .history-title {
@@ -991,23 +1010,13 @@ header nav .nav-item:last-child .nav-link:hover::before {
   line-height: 1.6;
 }
 
-.history-footnote {
-  margin-top: 26px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 0.95rem;
-}
-.history-footnote code {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* Timeline container */
+/* timeline container */
 .timeline {
   position: relative;
-  padding: 10px 0;
+  padding: 6px 0;
 }
 
-/* The center line (sticky feeling) */
+/* center line */
 .timeline-line {
   position: absolute;
   left: 50%;
@@ -1018,76 +1027,135 @@ header nav .nav-item:last-child .nav-link:hover::before {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* The “fill” that grows as you scroll */
+/* fill */
 .timeline-line-fill {
   position: absolute;
   left: 0;
   top: 0;
   width: 2px;
   height: 0%;
-  background: #2382c0;
+  background: var(--brand-blue);
   box-shadow: 0 0 18px rgba(35, 130, 192, 0.35);
 }
 
-/* Each item */
+/* each item (grid for staggering) */
 .timeline-item {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 80px 1fr; /* left | line | right */
+  grid-template-columns: 1fr var(--timeline-center) 1fr;
   align-items: start;
-  padding: clamp(16px, 2.4vw, 24px) 0;
+
+  /* ✅ very small spacing between items */
+  padding: var(--timeline-item-pad-y) 0;
 }
 
-/* Dot on the line */
-.timeline-dot {
-  grid-column: 2;
-  justify-self: center;
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  background: #2382c0;
-  box-shadow: 0 0 0 6px rgba(35, 130, 192, 0.18);
-  margin-top: 18px;
+/* ✅ overlap (negative margin) */
+.timeline-item + .timeline-item {
+  margin-top: calc(-1 * var(--timeline-overlap));
 }
 
-/* Card */
+/* card */
 .timeline-card {
+  position: relative;
+  z-index: 1;
+
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.10);
   box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
   overflow: hidden;
-  padding: 14px;
-  max-width: 520px;
+  padding: 12px;
+
+  width: min(
+    var(--timeline-card-max),
+    calc(50vw - (var(--timeline-center) / 2) - var(--timeline-gutter))
+  );
+  min-width: var(--timeline-card-min);
+
+  display: flex;
+  flex-direction: column;
+
+  /* reveal */
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 520ms ease, transform 520ms ease;
+  will-change: transform, opacity;
 }
 
-/* Alternate left/right on desktop */
+.timeline-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* alternate left/right */
 .timeline-item:nth-child(odd) .timeline-card {
   grid-column: 1;
   justify-self: end;
-  margin-right: 10px;
+  margin-right: var(--timeline-gutter);
 }
+
 .timeline-item:nth-child(even) .timeline-card {
   grid-column: 3;
   justify-self: start;
-  margin-left: 10px;
+  margin-left: var(--timeline-gutter);
 }
 
-/* Year label */
-.timeline-year {
-  font-weight: 800;
-  letter-spacing: 2px;
+/* ✅ subtle extra staggering so overlap feels intentional */
+.timeline-item:nth-child(odd) .timeline-card {
+  transform: translateY(12px) rotate(-0.15deg);
+}
+.timeline-item:nth-child(even) .timeline-card {
+  transform: translateY(12px) rotate(0.15deg);
+}
+.timeline-card.is-visible {
+  transform: translateY(0) rotate(0deg);
+}
+
+/* head */
+.timeline-head {
+  display: grid;
+  gap: 6px;
   margin-bottom: 10px;
-  font-size: 1.1rem;
 }
 
-/* Image */
+.timeline-year {
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 1.08rem;
+}
+
+.timeline-carname {
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.4px;
+}
+
+/* competitions pills */
+.timeline-comps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+/* ✅ taller image */
 .timeline-media {
-  aspect-ratio: 16 / 9;
+  height: clamp(220px, 22vw, 330px);
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.10);
   overflow: hidden;
-  margin-bottom: 12px;
+  margin: 10px 0 10px;
 }
+
 .timeline-media img {
   width: 100%;
   height: 100%;
@@ -1095,49 +1163,143 @@ header nav .nav-item:last-child .nav-link:hover::before {
   object-fit: cover;
 }
 
-/* Info rows */
-.timeline-info {
+/* panels */
+.timeline-panels {
+  display: grid;
+  grid-template-columns: 1fr 0.65fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.panel {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   display: grid;
   gap: 8px;
 }
-.info-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.info-label {
-  color: rgba(255, 255, 255, 0.62);
-  font-weight: 700;
+
+.panel-label {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.78rem;
-}
-.info-value {
-  color: rgba(255, 255, 255, 0.88);
-  font-weight: 600;
-  font-size: 0.95rem;
+  letter-spacing: 0.10em;
+  font-size: 12px;
 }
 
+.panel-value {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+/* competition list */
+.comp-list {
+  display: grid;
+  gap: 8px;
+}
+
+.comp-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.comp-name {
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.92rem;
+}
+
+.comp-place {
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* notes */
 .timeline-notes {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   color: rgba(255, 255, 255, 0.72);
   line-height: 1.5;
 }
 
-/* Hover polish */
+.muted {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* results button */
+.results-btn {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  border: 1px solid rgba(35, 130, 192, 0.6);
+  background: rgba(35, 130, 192, 0.12);
+  color: #fff;
+  width: fit-content;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
 @media (hover: hover) {
-  .timeline-card {
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  }
-  .timeline-card:hover {
+  .results-btn:hover {
     transform: translateY(-2px);
-    border-color: rgba(35, 130, 192, 0.35);
-    box-shadow: 0 26px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(35, 130, 192, 0.95);
+    box-shadow: 0 0 18px rgba(35, 130, 192, 0.25);
   }
 }
 
-/* Mobile: single column, line on the left */
+/* medal effects */
+.timeline-item.medal-gold .timeline-card {
+  border-color: rgba(255, 215, 0, 0.55);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35), 0 0 22px rgba(255, 215, 0, 0.16);
+}
+.timeline-item.medal-silver .timeline-card {
+  border-color: rgba(192, 192, 192, 0.55);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35), 0 0 22px rgba(192, 192, 192, 0.14);
+}
+.timeline-item.medal-bronze .timeline-card {
+  border-color: rgba(205, 127, 50, 0.55);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35), 0 0 22px rgba(205, 127, 50, 0.14);
+}
+
+/* ✅ improve overlap look: keep later cards above earlier ones */
+.timeline-item { z-index: 1; }
+.timeline-item:nth-child(1) { z-index: 40; }
+.timeline-item:nth-child(2) { z-index: 39; }
+.timeline-item:nth-child(3) { z-index: 38; }
+.timeline-item:nth-child(4) { z-index: 37; }
+.timeline-item:nth-child(5) { z-index: 36; }
+.timeline-item:nth-child(6) { z-index: 35; }
+.timeline-item:nth-child(7) { z-index: 34; }
+.timeline-item:nth-child(8) { z-index: 33; }
+.timeline-item:nth-child(9) { z-index: 32; }
+.timeline-item:nth-child(10) { z-index: 31; }
+.timeline-item:nth-child(11) { z-index: 30; }
+.timeline-item:nth-child(12) { z-index: 29; }
+.timeline-item:nth-child(13) { z-index: 28; }
+.timeline-item:nth-child(14) { z-index: 27; }
+.timeline-item:nth-child(15) { z-index: 26; }
+.timeline-item:nth-child(16) { z-index: 25; }
+.timeline-item:nth-child(17) { z-index: 24; }
+
+/* ✅ Mobile: reduce overlap (or remove) so it stays readable */
 @media (max-width: 900px) {
+  :root {
+    --timeline-center: 40px;
+    --timeline-overlap: 38px; /* smaller overlap on mobile */
+    --timeline-card-min: 0px;
+  }
+
   .timeline-line {
     left: 18px;
     transform: none;
@@ -1145,19 +1307,12 @@ header nav .nav-item:last-child .nav-link:hover::before {
 
   .timeline-item {
     grid-template-columns: 40px 1fr;
-    padding: 18px 0;
+    padding: 6px 0;
   }
 
-  .timeline-dot {
-    grid-column: 1;
-    justify-self: center;
-    margin-top: 20px;
-  }
-
-  .timeline-item .timeline-card {
+  .timeline-card {
+    width: 100%;
     grid-column: 2;
-    justify-self: stretch;
-    max-width: 100%;
     margin: 0 0 0 10px;
   }
 
@@ -1166,5 +1321,93 @@ header nav .nav-item:last-child .nav-link:hover::before {
     margin-left: 10px;
     margin-right: 0;
   }
+
+  .timeline-panels {
+    grid-template-columns: 1fr;
+  }
 }
-  
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .timeline-card {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* =========================
+   Floating controls (bottom-right)
+========================= */
+.history-controls {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  display: grid;
+  gap: 10px;
+  z-index: 5000; /* ✅ above cards */
+}
+
+.history-control {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.4);
+}
+
+.history-control span {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.history-control select {
+  appearance: none;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #2382c0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 800;
+  outline: none;
+}
+
+.history-control-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #2382c0;
+  padding: 12px;
+  border-radius: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+@media (hover: hover) {
+  .history-control-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(35, 130, 192, 0.55);
+    box-shadow: 0 0 18px rgba(35, 130, 192, 0.25);
+  }
+}
+
+/* ✅ Mobile: keep it usable */
+@media (max-width: 520px) {
+  .history-controls {
+    right: 10px;
+    bottom: 10px;
+  }
+  .history-control,
+  .history-control-btn {
+    border-radius: 12px;
+    padding: 10px;
+  }
+}

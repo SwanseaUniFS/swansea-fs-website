@@ -48,16 +48,12 @@
       </div>
     </header>
 
-    <!-- =========================
-         HISTORY CONTENT
-    ========================== -->
     <main class="history-page">
       <div class="container">
         <div class="history-hero">
           <h2 class="history-title">Our History</h2>
           <p class="history-subtitle">
             Scroll through our cars from <strong>2026</strong> back to <strong>2001</strong>.
-            Each year shows the car image, competitions attended, and world rank.
           </p>
         </div>
 
@@ -69,14 +65,9 @@
           <!-- Items injected by JS -->
           <div id="timelineItems"></div>
         </section>
-
-        <p class="history-footnote">
-          To <strong>skip a year</strong> (e.g. <code>2003</code>), remove that entry from
-          <code>timelineData</code> in the script.
-        </p>
       </div>
 
-      <!-- ✅ Floating controls (now fixed, not sticky) -->
+      <!-- Floating controls -->
       <div class="history-controls" aria-label="Timeline controls">
         <label class="history-control">
           <span>Jump to year</span>
@@ -86,6 +77,64 @@
           ↑ Top
         </button>
       </div>
+              <section class="section-2 partners-section">
+        <div class="container">
+          <div class="title">
+            <h2>Our Partners</h2>
+          </div>
+
+          <div class="sponsors-logos" aria-label="Partner logos">
+            <div class="sponsor-logo">
+              <img alt="EasyComposites (black and white)" class="bw" src="public/sponsors/EC OriginalBW.png" />
+              <a aria-label="EasyComposites" href="https://www.easycomposites.co.uk/" target="_blank" rel="noopener">
+                <img alt="EasyComposites" class="colorimage" src="public/sponsors/EC Original.png" />
+              </a>
+            </div>
+
+            <div class="sponsor-logo">
+              <img alt="Llando Tuning (black and white)" class="bw" src="public/sponsors/ltcdarkbw.png" />
+              <a aria-label="Llando Tuning" href="https://tuning.wales/" target="_blank" rel="noopener">
+                <img alt="Llando Tuning" class="colorimage" src="public/sponsors/ltcdark.png" />
+              </a>
+            </div>
+
+            <div class="sponsor-logo">
+              <img alt="Vita (black and white)" class="bw" src="public/sponsors/VitaBW.png" />
+              <a aria-label="Vita" href="https://www.thevitagroup.com/" target="_blank" rel="noopener">
+                <img alt="Vita" class="colorimage" src="public/sponsors/VitaColour.png" />
+              </a>
+            </div>
+
+            <div class="sponsor-logo">
+              <img alt="Rapid Harness (black and white)" class="bw" src="public/sponsors/Rapid-Harness-Logobw.png" />
+              <a aria-label="Rapid Harness" href="https://rapidharness.com/" target="_blank" rel="noopener">
+                <img alt="Rapid Harness" class="colorimage" src="public/sponsors/Rapid-Harness-Logo.png" />
+              </a>
+            </div>
+
+            <div class="sponsor-logo">
+              <img alt="DTA (black and white)" class="bw" src="public/sponsors/DTAFastBW.png" />
+              <a aria-label="DTA" href="https://dtafast.co.uk/" target="_blank" rel="noopener">
+                <img alt="DTA" class="colorimage" src="public/sponsors/DTAFastColour.png" />
+              </a>
+            </div>
+
+            <div class="sponsor-logo">
+              <img alt="Kestrel (black and white)" class="bw" src="public/sponsors/kestralbw.png" />
+              <a aria-label="Kestrel" href="https://proformancemetals.co.uk/" target="_blank" rel="noopener">
+                <img alt="Kestrel" class="colorimage" src="public/sponsors/kestralcolor.png" />
+              </a>
+            </div>
+
+            <div class="sponsor-logo">
+              <img alt="Proformance (black and white)" class="bw" src="public/sponsors/ProformanceBW.png" />
+              <a aria-label="Proformance" href="https://proformancemetals.co.uk/" target="_blank" rel="noopener">
+                <img alt="Proformance" class="colorimage" src="public/sponsors/ProfromanceColor.png" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -105,6 +154,7 @@
           <a href="team.html">Team</a><br />
           <a href="sponsors.html">Sponsors</a><br />
           <a href="gallery.html">Gallery</a><br />
+          <a href="join-us.html">Join Us</a><br />
           <a href="https://www.swansea.ac.uk/">The University</a>
         </p>
       </div>
@@ -128,7 +178,7 @@
       document.addEventListener("DOMContentLoaded", () => {
         const header = document.getElementById("header");
         const toggle = document.getElementById("mobile-menu-toggle");
-        const navLinks = header.querySelectorAll("nav a");
+        const navLinks = header?.querySelectorAll("nav a");
         if (!header || !toggle) return;
 
         const openMenu = () => {
@@ -168,23 +218,21 @@
           if (e.key === "Escape") closeMenu();
         });
 
-        navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+        navLinks?.forEach((link) => link.addEventListener("click", closeMenu));
 
         window.addEventListener("resize", () => {
           if (window.innerWidth >= 768) closeMenu();
         });
       });
 
-      // ===== History Timeline + Lenis (with fallback loader) =====
+      // ===== History Timeline + Lenis + Scroll-reveal animations =====
       document.addEventListener("DOMContentLoaded", async () => {
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        // --- Lenis loader with fallback ---
         async function ensureLenisLoaded() {
           if (prefersReducedMotion) return false;
           if (window.Lenis) return true;
 
-          // If jsDelivr failed or Lenis isn't present, try unpkg automatically
           await new Promise((resolve) => {
             const s = document.createElement("script");
             s.src = "https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js";
@@ -198,7 +246,6 @@
         }
 
         const hasLenis = await ensureLenisLoaded();
-
         const lenis = hasLenis
           ? new Lenis({
               duration: 1.15,
@@ -210,7 +257,6 @@
             })
           : null;
 
-        // RAF loop (Lenis needs this)
         function raf(time) {
           if (lenis) lenis.raf(time);
           updateFill();
@@ -219,18 +265,195 @@
         requestAnimationFrame(raf);
 
         /**
-         * EDIT THIS ARRAY:
-         * - Add real images + stats
-         * - To SKIP a year (e.g. 2003) just remove that object
+         * ✅ competitionResults:
+         *  - label: competition name
+         *  - placed: your place
+         *  - total: number of teams entered
          */
         const timelineData = [
-          { year: 2026, carName: "SR-26 (Placeholder)", image: "public/cars/2026.jpg", competitions: ["FS UK", "FS Germany"], worldRank: 42, notes: "New aero package and lightweight chassis iteration." },
-          { year: 2025, carName: "SR-25 (Placeholder)", image: "public/cars/2025.jpg", competitions: ["FS UK"], worldRank: 55, notes: "Focus on reliability and manufacturability improvements." },
-          { year: 2024, carName: "SR-24 (Placeholder)", image: "public/cars/2024.jpg", competitions: ["FS UK", "FS Austria"], worldRank: 61, notes: "Powertrain upgrades with improved cooling performance." },
-          // ...
-          { year: 2002, carName: "SR-02 (Placeholder)", image: "public/cars/2002.jpg", competitions: ["FS UK"], worldRank: null, notes: "Early platform development." },
-          { year: 2001, carName: "SR-01 (Placeholder)", image: "public/cars/2001.jpg", competitions: ["FS UK"], worldRank: null, notes: "First-year entry and team foundations." },
+          {
+            year: 2026,
+            carName: "SR-26",
+            image: "public/Swansea Cars/S26.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [
+              { label: "FS UK", placed: null, total: null }],
+            worldRank: "N/A",
+            notes: "Currently Ongoing",
+          },
+          {
+            year: 2025,
+            carName: "SR-25",
+            image: "public/Swansea Cars/S25.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 33, total: 96 }],
+            worldRank: 235,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/345",
+          },
+          {
+            year: 2023,
+            carName: "SR-23",
+            image: "public/Swansea Cars/S23.jpeg",
+            competitions: ["FS UK", "FS Italy"],
+            competitionResults: [{ label: "FS UK", placed: 59, total: 60 },{ label: "FS Italy", placed: 21, total: 22 }],
+            worldRank: 381,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/270",
+          },
+          {
+            year: 2021,
+            carName: "SR-21",
+            image: "public/Swansea Cars/S21.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 16, total: 32 }],
+            worldRank: 264,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/226",
+          },
+          {
+            year: 2019,
+            carName: "SR-19",
+            image: "public/Swansea Cars/S19.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 28, total: 65}],
+            worldRank: 371,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/207",
+          },
+          {
+            year: 2017,
+            carName: "SR-17",
+            image: "public/Swansea Cars/S17.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 38, total: 62}],
+            worldRank: 285,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/168",
+          },
+          {
+            year: 2016,
+            carName: "SR-16",
+            image: "public/Swansea Cars/S16.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 48, total: 106 }],
+            worldRank: 189,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/147",
+          },
+          {
+            year: 2015,
+            carName: "SR-15",
+            image: "public/Swansea Cars/S15.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 73, total: 92 }],
+            worldRank: 178,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/129",
+          },
+          {
+            year: 2014,
+            carName: "SR-14",
+            image: "public/Swansea Cars/S14.jpg",
+            competitions: ["FS UK", "FS Hungary"],
+            competitionResults: [
+              { label: "FS UK", placed: 33, total: 90 },
+              { label: "FS Hungary", placed: 16, total: 38 },
+            ],
+            worldRank: 169,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/113",
+            notes: "Placed Second in the Costing Section of the Competition",
+
+          },
+          {
+            year: 2012,
+            carName: "SR-12",
+            image: "public/Swansea Cars/S12.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 30, total: 97 }],
+            worldRank: 166,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/85",
+          },
+          {
+            year: 2011,
+            carName: "SR-11",
+            image: "public/Swansea Cars/S11.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 31, total: 77 }],
+            worldRank: 155,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/73",
+          },
+          {
+            year: 2009,
+            carName: "SR-09",
+            image: "public/Swansea Cars/S08.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 14, total: 78 }],
+            worldRank: 29,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/55",
+            notes: "Placed Third in the Endurance Section of the Competition",
+
+          },
+          {
+            year: 2007,
+            carName: "SR-07",
+            image: "public/Swansea Cars/S07.jpeg",
+            competitions: ["FS UK", "FS Germany"],
+            competitionResults: [
+              { label: "FS UK", placed: 29, total: 69 },
+              { label: "FS Germany", placed: 16, total: 53 },
+            ],   
+            worldRank: 119,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/37",
+            notes: "Again Placed First in the Fuel Efficiency Section of the Competition",
+
+          },
+          {
+            year: 2006,
+            carName: "SR-06",
+            image: "public/Swansea Cars/S06.jpg.jpeg",
+            competitions: ["FS UK", "FS Germany"],
+            competitionResults: [
+              { label: "FS UK", placed: 48, total: 59 },
+              { label: "FS Germany", placed: 23, total: 38 },
+            ],            
+            worldRank: 178,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/30",
+            notes: "Placed First in the Fuel Efficiency Section of the Competition",
+          },
+          {
+            year: 2004,
+            carName: "SR-04",
+            image: "public/Swansea Cars/S04.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 34, total: 53 }],
+            worldRank: 152,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/20",
+          },
+          {
+            year: 2002,
+            carName: "SR-02",
+            image: "public/Swansea Cars/S02.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 34, total: 35 }],
+            worldRank: 116,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/13",
+          },
+          {
+            year: 2001,
+            carName: "SR-01",
+            image: "public/Swansea Cars/S01.jpg",
+            competitions: ["FS UK"],
+            competitionResults: [{ label: "FS UK", placed: 16, total: 23 }],
+            worldRank: 102,
+            resultsUrl: "https://dev.fs-world.org/competition/2/event/10",
+            notes: "First-year entry and team foundations.",
+          },
         ].sort((a, b) => b.year - a.year);
+
+        // ✅ top 3 medal styling based on best world ranks (lowest number = best)
+        const ranked = timelineData
+          .filter((d) => Number.isFinite(d.worldRank))
+          .slice()
+          .sort((a, b) => a.worldRank - b.worldRank);
+
+        const medalByYear = new Map();
+        if (ranked[0]) medalByYear.set(ranked[0].year, "medal-gold");
+        if (ranked[1]) medalByYear.set(ranked[1].year, "medal-silver");
+        if (ranked[2]) medalByYear.set(ranked[2].year, "medal-bronze");
 
         const itemsRoot = document.getElementById("timelineItems");
         const yearJump = document.getElementById("yearJump");
@@ -238,38 +461,71 @@
         const fillEl = document.getElementById("timelineFill");
         const timelineEl = document.getElementById("timeline");
 
-        // Build timeline DOM (uniform cards)
+        const placeText = (placed, total) => {
+          if (!Number.isFinite(placed) || !Number.isFinite(total)) return "—";
+          return `${placed}/${total}`;
+        };
+
         itemsRoot.innerHTML = timelineData
           .map((d) => {
-            const comps = (d.competitions || []).map((c) => `<span class="pill">${escapeHtml(c)}</span>`).join("");
-            const rank = d.worldRank == null ? "—" : `#${d.worldRank}`;
+            const compsPills = (d.competitions || [])
+              .map((c) => `<span class="pill">${escapeHtml(c)}</span>`)
+              .join("");
+
+            const rankValue = d.worldRank == null ? "—" : `#${d.worldRank}`;
+            const medalClass = medalByYear.get(d.year) || "";
+            const resultsUrl = d.resultsUrl ? escapeAttr(d.resultsUrl) : "";
+
+            const compRows = (d.competitionResults || [])
+              .map((r) => {
+                return `
+                  <div class="comp-row">
+                    <div class="comp-name">${escapeHtml(r.label || "")}</div>
+                    <div class="comp-place">${escapeHtml(placeText(r.placed, r.total))}</div>
+                  </div>
+                `;
+              })
+              .join("");
 
             return `
-              <article class="timeline-item" id="year-${d.year}" data-year="${d.year}">
-                <div class="timeline-dot" aria-hidden="true"></div>
-
+              <article class="timeline-item ${medalClass}" id="year-${d.year}" data-year="${d.year}">
                 <div class="timeline-card">
                   <div class="timeline-head">
                     <div class="timeline-year">${d.year}</div>
                     <div class="timeline-carname">${escapeHtml(d.carName || "")}</div>
+
+                    <div class="timeline-comps">
+                      ${compsPills || "<span class='muted'>—</span>"}
+                    </div>
+
+                    ${
+                      resultsUrl
+                        ? `<a class="results-btn" href="${resultsUrl}" aria-label="View results for ${d.year}">View Results</a>`
+                        : ""
+                    }
                   </div>
 
                   <div class="timeline-media">
                     <img src="${escapeAttr(d.image)}" alt="${escapeAttr(`Car from ${d.year}`)}" loading="lazy" />
                   </div>
 
-                  <div class="timeline-info">
-                    <div class="info-row">
-                      <span class="info-label">Competitions</span>
-                      <span class="info-value pills">${comps || "<span class='muted'>—</span>"}</span>
+                  <div class="timeline-panels">
+                    <!-- ✅ Competition ranking (variable count) -->
+                    <div class="panel">
+                      <div class="panel-label">Competition Ranking</div>
+                      <div class="comp-list">
+                        ${compRows || `<div class="muted">—</div>`}
+                      </div>
                     </div>
-                    <div class="info-row">
-                      <span class="info-label">World Rank</span>
-                      <span class="info-value">${rank}</span>
+
+                    <!-- ✅ World ranking (single value) -->
+                    <div class="panel">
+                      <div class="panel-label">World Ranking</div>
+                      <div class="panel-value">${rankValue}</div>
                     </div>
                   </div>
 
-                  ${d.notes ? `<p class="timeline-notes">${escapeHtml(d.notes)}</p>` : `<p class="timeline-notes muted">—</p>`}
+                  ${d.notes ? `<p class="timeline-notes">${escapeHtml(d.notes)}</p>` : `<p class="timeline-notes muted"></p>`}
                 </div>
               </article>
             `;
@@ -279,7 +535,6 @@
         // Populate jump dropdown
         yearJump.innerHTML = timelineData.map((d) => `<option value="${d.year}">${d.year}</option>`).join("");
 
-        // Jump-to-year (Lenis-aware)
         yearJump.addEventListener("change", (e) => {
           const y = e.target.value;
           const target = document.getElementById(`year-${y}`);
@@ -289,25 +544,29 @@
           else target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
 
-        // Back to top (Lenis-aware)
         scrollTopBtn.addEventListener("click", () => {
           if (lenis) lenis.scrollTo(0, { duration: 1.0 });
           else window.scrollTo({ top: 0, behavior: "smooth" });
         });
 
-        // Reveal animation (add .is-visible on card)
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
+        // Scroll-reveal
+        if (!prefersReducedMotion && "IntersectionObserver" in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
                 const card = entry.target.querySelector(".timeline-card");
                 if (card) card.classList.add("is-visible");
-              }
-            });
-          },
-          { threshold: 0.22 }
-        );
-        document.querySelectorAll(".timeline-item").forEach((el) => io.observe(el));
+                io.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+          );
+
+          document.querySelectorAll(".timeline-item").forEach((el) => io.observe(el));
+        } else {
+          document.querySelectorAll(".timeline-card").forEach((el) => el.classList.add("is-visible"));
+        }
 
         // Timeline fill progress
         const clamp01 = (n) => Math.max(0, Math.min(1, n));
