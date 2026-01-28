@@ -1,6 +1,6 @@
-/* styles.css */
 
-/* Local font files */
+
+
 @font-face {
   font-family: "Plus Jakarta Sans";
   src: url("fonts/PlusJakartaSans-Regular.ttf") format("truetype");
@@ -14,7 +14,7 @@
   font-style: normal;
 }
 
-/* Base */
+
 *,
 *::before,
 *::after {
@@ -53,14 +53,14 @@ a:hover {
   color: #2382c0;
 }
 
-/* Container */
+
 .container {
   width: 100%;
   max-width: 1110px;
   margin: 0 auto;
 }
 
-/* ✅ IMPORTANT: add padding on small screens so text never touches edges */
+
 @media (max-width: 767px) {
   .container {
     padding-left: 18px;
@@ -73,7 +73,7 @@ a:hover {
   }
 }
 
-/* Headings */
+
 h1,
 h2 {
   margin: 0;
@@ -102,9 +102,7 @@ h4 {
   text-shadow: 0 0 8px rgba(35, 130, 192, 0.7);
 }
 
-/* =========================
-   Header
-========================= */
+
 header {
   position: fixed;
   inset: 0 0 auto 0;
@@ -122,7 +120,7 @@ header {
 header .header-wrapper {
   display: flex;
   align-items: center;
-  padding: 20px 0 0; /* uses container padding now */
+  padding: 20px 0 0;
 }
 @media (min-width: 768px) {
   header .header-wrapper {
@@ -131,7 +129,7 @@ header .header-wrapper {
   }
 }
 
-/* Logo float */
+
 @keyframes logoFloat {
   0% { transform: translateY(0); }
   50% { transform: translateY(-2px); }
@@ -154,9 +152,7 @@ header .logo:hover {
   }
 }
 
-/* =========================
-   Desktop nav
-========================= */
+
 header nav {
   display: none;
   margin-top: 28px;
@@ -183,7 +179,7 @@ header nav .nav-item {
   }
 }
 
-/* Link style */
+
 header nav .nav-link {
   font-size: 14px;
   font-weight: 700;
@@ -214,7 +210,7 @@ header nav .nav-link:hover::after {
   transform: scaleX(1);
 }
 
-/* Join Us desktop button */
+
 header nav .nav-item:last-child .nav-link::after {
   display: none;
 }
@@ -250,9 +246,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   transform: scaleX(1);
 }
 
-/* =========================
-   Mobile hamburger
-========================= */
+
 #mobile-menu-toggle {
   width: 30px;
   height: 22px;
@@ -284,9 +278,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
 #mobile-menu-toggle.toggled .line-2 { opacity: 0; }
 #mobile-menu-toggle.toggled .line-3 { top: 10px; transform: rotate(-45deg); }
 
-/* =========================
-   Mobile menu overlay (covers header too)
-========================= */
+
 @media (max-width: 767px) {
   header nav {
     display: block;
@@ -376,9 +368,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* =========================
-   Banner
-========================= */
+
 .header-banner {
   max-height: 100vh;
   overflow: hidden;
@@ -401,9 +391,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   background: linear-gradient(0deg, #000, transparent 40%);
 }
 
-/* =========================
-   Sections
-========================= */
+
 .page-formula2 {
   position: relative;
   margin-bottom: -160px;
@@ -432,7 +420,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   padding-top: 60px;
 }
 
-/* ✅ Mobile: center the hero text + keep margins */
+
 @media (max-width: 767px) {
   .page-formula2 section.section-1 .block-left {
     text-align: center;
@@ -484,7 +472,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   object-fit: cover;
 }
 
-/* Countdown */
+
 #countdown {
   display: flex;
   justify-content: center;
@@ -512,21 +500,19 @@ header nav .nav-item:last-child .nav-link:hover::before {
   color: #ddd;
 }
 
-/* Title */
+
 .title h2 {
   margin-top: 30px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-/* =========================
-   ✅ Our Partners (responsive + centered)
-========================= */
+
 .partners-section {
   padding: clamp(28px, 4vw, 56px) 0;
 }
 
-/* Grid that centers and wraps nicely */
+
 .partners-section .sponsors-logos {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -539,21 +525,21 @@ header nav .nav-item:last-child .nav-link:hover::before {
   padding: 10px 0 0;
 }
 
-/* 3 across on small tablets */
+
 @media (min-width: 560px) {
   .partners-section .sponsors-logos {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/* 4 across on desktop */
+
 @media (min-width: 900px) {
   .partners-section .sponsors-logos {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-/* Logo “card” */
+
 .partners-section .sponsor-logo {
   position: relative;
   width: 100%;
@@ -573,20 +559,20 @@ header nav .nav-item:last-child .nav-link:hover::before {
   overflow: hidden;
 }
 
-/* Accessible focus ring */
+
 .partners-section .sponsor-logo:focus-within {
   outline: 2px solid rgba(35, 130, 192, 0.75);
   outline-offset: 3px;
 }
 
-/* Full clickable area */
+
 .partners-section .sponsor-logo > a {
   position: absolute;
   inset: 0;
   display: block;
 }
 
-/* Keep images centered */
+
 .partners-section .sponsor-logo img {
   max-width: 78%;
   max-height: 70%;
@@ -601,7 +587,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   pointer-events: none;
 }
 
-/* Hover swap (BW -> Color) */
+
 .partners-section .sponsor-logo .colorimage {
   opacity: 0;
   z-index: 2;
@@ -626,7 +612,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* Touch devices: don't hide the color version on tap-only screens */
+
 @media (hover: none) {
   .partners-section .sponsor-logo .colorimage {
     opacity: 1;
@@ -636,9 +622,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* =========================
-   Footer
-========================= */
+
 .footer {
   display: flex;
   justify-content: center;
@@ -674,19 +658,17 @@ header nav .nav-item:last-child .nav-link:hover::before {
     margin: 10px 0;
   }
 }
-/* =========================
-   TEAM GRID (add-only)
-========================= */
+
 :root {
   --brand-blue: #2382c0;
 }
 
-/* Optional: section spacing on the team page */
+
 .team-section {
   padding: clamp(28px, 5vw, 70px) 0;
 }
 
-/* Title like your screenshot */
+
 .team-title h2 {
   text-align: center;
   letter-spacing: 4px;
@@ -695,8 +677,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   margin: 10px 0 34px;
 }
 
-/* Responsive grid:
-   1 col phone, 2 col small, 3 col tablet, 4 col desktop */
+
 .team-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -725,12 +706,12 @@ header nav .nav-item:last-child .nav-link:hover::before {
   flex-direction: column;
 }
 
-/* Blue square behind PNG headshots */
+
 .team-photo {
   width: 100%;
   aspect-ratio: 1 / 1;
   background: var(--brand-blue);
-  border-radius: 0px; /* set to 16px if you prefer rounded */
+  border-radius: 0px;
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -738,19 +719,19 @@ header nav .nav-item:last-child .nav-link:hover::before {
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
 }
 
-/* PNG stays centred and clean */
+
 .team-photo img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;      /* fills the square */
+  object-fit: cover !important;     
   object-position: center !important;
-  filter: none !important;           /* optional: remove shadow if you want cleaner edges */
+  filter: none !important;          
 }
 
 
-/* Name + role */
+
 .team-name {
-  margin-top: 20px; /* was larger before */
+  margin-top: 20px;
   margin: 14px 0 0;
   font-size: 18px;
   letter-spacing: 0.8px;
@@ -765,7 +746,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   font-weight: 500;
 }
 
-/* Extra info list */
+
 .team-meta {
   margin: 12px 0 0;
   display: grid;
@@ -793,7 +774,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   font-weight: 500;
 }
 
-/* Subtle hover */
+
 @media (hover: hover) {
   .team-photo {
     transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
@@ -804,7 +785,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
     box-shadow: 0 18px 34px rgba(0, 0, 0, 0.45);
   }
 }
-/* === HARD RESET spacing under team image === */
+
 .team-photo {
   margin-bottom: 0 !important;
 }
@@ -819,7 +800,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
 .team-role {
   margin-top: 2px !important;
 }
-/* === Remove any border/gap inside the blue team square === */
+
 .team-photo {
   padding: 0 !important;
   line-height: 0 !important;
@@ -836,18 +817,15 @@ header nav .nav-item:last-child .nav-link:hover::before {
   object-fit: cover !important;
   object-position: center !important;
 }
-/* =========================
-   GALLERY (Instagram grid + Load More)
-   Paste at bottom of styles.css
-========================= */
 
-/* Keeps content below your fixed header */
+
+
 .gallery-page {
   padding-top: clamp(110px, 16vw, 150px);
   padding-bottom: clamp(40px, 7vw, 80px);
 }
 
-/* Title styling to match your vibe */
+
 .gallery-title {
   text-align: center;
   letter-spacing: 4px;
@@ -856,7 +834,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   margin: 0 0 clamp(22px, 4vw, 40px);
 }
 
-/* Grid: 1 col phone, 2 col tablet, 3 col desktop */
+
 .gallery-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -875,12 +853,12 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* Tile */
+
 .gallery-item {
   display: block;
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1; /* Instagram square look */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.10);
@@ -888,7 +866,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
-/* Image fills tile */
+
 .gallery-item img {
   width: 100%;
   height: 100%;
@@ -898,7 +876,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   transition: transform 240ms ease, filter 240ms ease;
 }
 
-/* Hover effect */
+
 @media (hover: hover) {
   .gallery-item:hover {
     transform: translateY(-3px);
@@ -909,7 +887,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
     transform: scale(1.05);
     filter: contrast(1.02) saturate(1.05);
   }
-  /* subtle overlay */
+ 
   .gallery-item::after {
     content: "";
     position: absolute;
@@ -924,19 +902,19 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* Hidden items for "Load more" */
+
 .gallery-item.is-hidden {
   display: none;
 }
 
-/* Button area */
+
 .gallery-actions {
   display: flex;
   justify-content: center;
   margin-top: clamp(22px, 4vw, 36px);
 }
 
-/* Load more button */
+
 .gallery-load-more {
   appearance: none;
   border: 2px solid #2382c0;
@@ -964,28 +942,25 @@ header nav .nav-item:last-child .nav-link:hover::before {
   transform: translateY(0);
 }
 
-/* =========================
-   HISTORY TIMELINE (OVERLAPPING + STAGGERED)
-   Replace your entire timeline CSS with this block
-========================= */
+
 
 :root {
   --brand-blue: #2382c0;
 
-  /* horizontal layout */
-  --timeline-center: 72px;     /* width of the center column */
-  --timeline-gutter: 18px;     /* gap from center line to card */
+ 
+  --timeline-center: 72px;    
+  --timeline-gutter: 18px;    
 
-  /* card sizing */
+ 
   --timeline-card-max: 520px;
   --timeline-card-min: 300px;
 
-  /* ✅ vertical spacing / overlap controls */
-  --timeline-item-pad-y: 2px;      /* base vertical padding per item (smaller = closer) */
-  --timeline-overlap: 220px;        /* how much each card overlaps the previous one */
+ 
+  --timeline-item-pad-y: 2px;     
+  --timeline-overlap: 220px;       
 }
 
-/* page spacing */
+
 .history-page {
   padding-top: clamp(110px, 16vw, 150px);
   padding-bottom: clamp(40px, 6vw, 70px);
@@ -1010,13 +985,13 @@ header nav .nav-item:last-child .nav-link:hover::before {
   line-height: 1.6;
 }
 
-/* timeline container */
+
 .timeline {
   position: relative;
   padding: 6px 0;
 }
 
-/* center line */
+
 .timeline-line {
   position: absolute;
   left: 50%;
@@ -1027,7 +1002,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* fill */
+
 .timeline-line-fill {
   position: absolute;
   left: 0;
@@ -1038,23 +1013,23 @@ header nav .nav-item:last-child .nav-link:hover::before {
   box-shadow: 0 0 18px rgba(35, 130, 192, 0.35);
 }
 
-/* each item (grid for staggering) */
+
 .timeline-item {
   position: relative;
   display: grid;
   grid-template-columns: 1fr var(--timeline-center) 1fr;
   align-items: start;
 
-  /* ✅ very small spacing between items */
+ 
   padding: var(--timeline-item-pad-y) 0;
 }
 
-/* ✅ overlap (negative margin) */
+
 .timeline-item + .timeline-item {
   margin-top: calc(-1 * var(--timeline-overlap));
 }
 
-/* card */
+
 .timeline-card {
   position: relative;
   z-index: 1;
@@ -1074,7 +1049,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   display: flex;
   flex-direction: column;
 
-  /* reveal */
+ 
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 520ms ease, transform 520ms ease;
@@ -1086,7 +1061,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   transform: translateY(0);
 }
 
-/* alternate left/right */
+
 .timeline-item:nth-child(odd) .timeline-card {
   grid-column: 1;
   justify-self: end;
@@ -1099,7 +1074,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   margin-left: var(--timeline-gutter);
 }
 
-/* ✅ subtle extra staggering so overlap feels intentional */
+
 .timeline-item:nth-child(odd) .timeline-card {
   transform: translateY(12px) rotate(-0.15deg);
 }
@@ -1110,7 +1085,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   transform: translateY(0) rotate(0deg);
 }
 
-/* head */
+
 .timeline-head {
   display: grid;
   gap: 6px;
@@ -1129,7 +1104,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   letter-spacing: 0.4px;
 }
 
-/* competitions pills */
+
 .timeline-comps {
   display: flex;
   flex-wrap: wrap;
@@ -1147,7 +1122,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   font-weight: 800;
 }
 
-/* ✅ taller image */
+
 .timeline-media {
   height: clamp(220px, 22vw, 330px);
   background: rgba(255, 255, 255, 0.06);
@@ -1163,7 +1138,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   object-fit: cover;
 }
 
-/* panels */
+
 .timeline-panels {
   display: grid;
   grid-template-columns: 1fr 0.65fr;
@@ -1193,7 +1168,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   font-size: 22px;
 }
 
-/* competition list */
+
 .comp-list {
   display: grid;
   gap: 8px;
@@ -1220,7 +1195,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   color: rgba(255, 255, 255, 0.92);
 }
 
-/* notes */
+
 .timeline-notes {
   margin: 8px 0 0;
   color: rgba(255, 255, 255, 0.72);
@@ -1231,7 +1206,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   color: rgba(255, 255, 255, 0.62);
 }
 
-/* results button */
+
 .results-btn {
   margin-top: 6px;
   display: inline-flex;
@@ -1258,7 +1233,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* medal effects */
+
 .timeline-item.medal-gold .timeline-card {
   border-color: rgba(255, 215, 0, 0.55);
   box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35), 0 0 22px rgba(255, 215, 0, 0.16);
@@ -1272,7 +1247,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35), 0 0 22px rgba(205, 127, 50, 0.14);
 }
 
-/* ✅ improve overlap look: keep later cards above earlier ones */
+
 .timeline-item { z-index: 1; }
 .timeline-item:nth-child(1) { z-index: 40; }
 .timeline-item:nth-child(2) { z-index: 39; }
@@ -1292,11 +1267,11 @@ header nav .nav-item:last-child .nav-link:hover::before {
 .timeline-item:nth-child(16) { z-index: 25; }
 .timeline-item:nth-child(17) { z-index: 24; }
 
-/* ✅ Mobile: reduce overlap (or remove) so it stays readable */
+
 @media (max-width: 900px) {
   :root {
     --timeline-center: 40px;
-    --timeline-overlap: 38px; /* smaller overlap on mobile */
+    --timeline-overlap: 38px;
     --timeline-card-min: 0px;
   }
 
@@ -1327,7 +1302,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* Reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .timeline-card {
     transition: none !important;
@@ -1336,16 +1311,14 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* =========================
-   Floating controls (bottom-right)
-========================= */
+
 .history-controls {
   position: fixed;
   right: 18px;
   bottom: 18px;
   display: grid;
   gap: 10px;
-  z-index: 5000; /* ✅ above cards */
+  z-index: 5000;
 }
 
 .history-control {
@@ -1399,7 +1372,7 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
-/* ✅ Mobile: keep it usable */
+
 @media (max-width: 520px) {
   .history-controls {
     right: 10px;
@@ -1411,3 +1384,128 @@ header nav .nav-item:last-child .nav-link:hover::before {
     padding: 10px;
   }
 }
+
+
+
+@media (min-width: 1100px) {
+  .sponsors-page .container {
+    max-width: 1500px;         
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .sponsors-page .container {
+    max-width: 1680px;         
+  }
+}
+
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(22px, 3vw, 44px);  
+  align-items: stretch;
+}
+
+@media (min-width: 560px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1150px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.sponsor-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  border: none;
+  background: transparent;
+  box-shadow: none;
+
+  padding: 34px 26px 26px;   
+  overflow: visible;
+}
+
+.sponsor-logo-wrap {
+  height: 240px;             
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.sponsor-logo-wrap img {
+  max-width: 96%;
+  max-height: 92%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.sponsor-name {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.sponsor-desc {
+  margin: 0 0 22px;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.8;
+  font-size: 16px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 6;      
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sponsor-btn {
+  margin-top: auto;
+  align-self: flex-start;     
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 18px;
+  border-radius: 0;           
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+
+  border: 0;
+  background: var(--brand-blue);
+  color: #000;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+@media (hover: hover) {
+  .sponsor-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(35, 130, 192, 0.35);
+  }
+}
+
+@media (min-width: 1400px) {
+  .sponsor-logo-wrap { height: 280px; }
+  .sponsor-name { font-size: 24px; }
+  .sponsor-desc { font-size: 16.5px; -webkit-line-clamp: 7; }
+}
+

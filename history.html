@@ -12,8 +12,8 @@
       rel="stylesheet"
     />
 
-    <!-- Lenis (smooth scrolling) - primary CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+    <!-- Lenis (smooth scrolling) -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis/lenis.min.js"></script>
   </head>
 
   <body>
@@ -57,7 +57,7 @@
           </p>
         </div>
 
-        <section class="timeline" id="timeline">
+        <section class="timeline" id="timeline" aria-label="History timeline">
           <div class="timeline-line" aria-hidden="true">
             <div class="timeline-line-fill" id="timelineFill"></div>
           </div>
@@ -77,7 +77,8 @@
           ↑ Top
         </button>
       </div>
-              <section class="section-2 partners-section">
+
+<section class="section-2 partners-section">
         <div class="container">
           <div class="title">
             <h2>Our Partners</h2>
@@ -130,6 +131,24 @@
               <img alt="Proformance (black and white)" class="bw" src="public/sponsors/ProformanceBW.png" />
               <a aria-label="Proformance" href="https://proformancemetals.co.uk/" target="_blank" rel="noopener">
                 <img alt="Proformance" class="colorimage" src="public/sponsors/ProfromanceColor.png" />
+              </a>
+            </div>
+                        <div class="sponsor-logo">
+              <img alt="HLP (black and white)" class="bw" src="public/sponsors/HLPbw.png" />
+              <a aria-label="HLP" href="https://proformancemetals.co.uk/" target="_blank" rel="noopener">
+                <img alt="HLP" class="colorimage" src="public/sponsors/HLP.png" />
+              </a>
+            </div>
+                        <div class="sponsor-logo">
+              <img alt="Entryphone (black and white)" class="bw" src="public/sponsors/Entryphone_Logo_BW_RGB.png" />
+              <a aria-label="Entryphone" href="https://proformancemetals.co.uk/" target="_blank" rel="noopener">
+                <img alt="Entryphone" class="colorimage" src="public/sponsors/Entryphone_Logo_White_RGB.png" />
+              </a>
+            </div>
+                        <div class="sponsor-logo">
+              <img alt="Gamma Technologies (black and white)" class="bw" src="public\sponsors\GAMMA TECHNOLOGIES LOGO 2021-1bw.png" />
+              <a aria-label="Gamma Technologies" href="https://proformancemetals.co.uk/" target="_blank" rel="noopener">
+                <img alt="Gamma Technologies" class="colorimage" src="public/sponsors/GAMMA TECHNOLOGIES LOGO 2021-1.webp" />
               </a>
             </div>
           </div>
@@ -264,20 +283,13 @@
         }
         requestAnimationFrame(raf);
 
-        /**
-         * ✅ competitionResults:
-         *  - label: competition name
-         *  - placed: your place
-         *  - total: number of teams entered
-         */
         const timelineData = [
           {
             year: 2026,
             carName: "SR-26",
             image: "public/Swansea Cars/S26.jpg",
             competitions: ["FS UK"],
-            competitionResults: [
-              { label: "FS UK", placed: null, total: null }],
+            competitionResults: [{ label: "FS UK", placed: null, total: null }],
             worldRank: "N/A",
             notes: "Currently Ongoing",
           },
@@ -295,7 +307,10 @@
             carName: "SR-23",
             image: "public/Swansea Cars/S23.jpeg",
             competitions: ["FS UK", "FS Italy"],
-            competitionResults: [{ label: "FS UK", placed: 59, total: 60 },{ label: "FS Italy", placed: 21, total: 22 }],
+            competitionResults: [
+              { label: "FS UK", placed: 59, total: 60 },
+              { label: "FS Italy", placed: 21, total: 22 },
+            ],
             worldRank: 381,
             resultsUrl: "https://dev.fs-world.org/competition/2/event/270",
           },
@@ -313,7 +328,7 @@
             carName: "SR-19",
             image: "public/Swansea Cars/S19.jpg",
             competitions: ["FS UK"],
-            competitionResults: [{ label: "FS UK", placed: 28, total: 65}],
+            competitionResults: [{ label: "FS UK", placed: 28, total: 65 }],
             worldRank: 371,
             resultsUrl: "https://dev.fs-world.org/competition/2/event/207",
           },
@@ -322,7 +337,7 @@
             carName: "SR-17",
             image: "public/Swansea Cars/S17.jpg",
             competitions: ["FS UK"],
-            competitionResults: [{ label: "FS UK", placed: 38, total: 62}],
+            competitionResults: [{ label: "FS UK", placed: 38, total: 62 }],
             worldRank: 285,
             resultsUrl: "https://dev.fs-world.org/competition/2/event/168",
           },
@@ -356,7 +371,6 @@
             worldRank: 169,
             resultsUrl: "https://dev.fs-world.org/competition/2/event/113",
             notes: "Placed Second in the Costing Section of the Competition",
-
           },
           {
             year: 2012,
@@ -385,7 +399,6 @@
             worldRank: 29,
             resultsUrl: "https://dev.fs-world.org/competition/2/event/55",
             notes: "Placed Third in the Endurance Section of the Competition",
-
           },
           {
             year: 2007,
@@ -395,11 +408,10 @@
             competitionResults: [
               { label: "FS UK", placed: 29, total: 69 },
               { label: "FS Germany", placed: 16, total: 53 },
-            ],   
+            ],
             worldRank: 119,
             resultsUrl: "https://dev.fs-world.org/competition/2/event/37",
             notes: "Again Placed First in the Fuel Efficiency Section of the Competition",
-
           },
           {
             year: 2006,
@@ -409,7 +421,7 @@
             competitionResults: [
               { label: "FS UK", placed: 48, total: 59 },
               { label: "FS Germany", placed: 23, total: 38 },
-            ],            
+            ],
             worldRank: 178,
             resultsUrl: "https://dev.fs-world.org/competition/2/event/30",
             notes: "Placed First in the Fuel Efficiency Section of the Competition",
@@ -444,7 +456,6 @@
           },
         ].sort((a, b) => b.year - a.year);
 
-        // ✅ top 3 medal styling based on best world ranks (lowest number = best)
         const ranked = timelineData
           .filter((d) => Number.isFinite(d.worldRank))
           .slice()
@@ -510,7 +521,6 @@
                   </div>
 
                   <div class="timeline-panels">
-                    <!-- ✅ Competition ranking (variable count) -->
                     <div class="panel">
                       <div class="panel-label">Competition Ranking</div>
                       <div class="comp-list">
@@ -518,7 +528,6 @@
                       </div>
                     </div>
 
-                    <!-- ✅ World ranking (single value) -->
                     <div class="panel">
                       <div class="panel-label">World Ranking</div>
                       <div class="panel-value">${rankValue}</div>
@@ -532,7 +541,6 @@
           })
           .join("");
 
-        // Populate jump dropdown
         yearJump.innerHTML = timelineData.map((d) => `<option value="${d.year}">${d.year}</option>`).join("");
 
         yearJump.addEventListener("change", (e) => {
@@ -549,7 +557,6 @@
           else window.scrollTo({ top: 0, behavior: "smooth" });
         });
 
-        // Scroll-reveal
         if (!prefersReducedMotion && "IntersectionObserver" in window) {
           const io = new IntersectionObserver(
             (entries) => {
@@ -568,7 +575,6 @@
           document.querySelectorAll(".timeline-card").forEach((el) => el.classList.add("is-visible"));
         }
 
-        // Timeline fill progress
         const clamp01 = (n) => Math.max(0, Math.min(1, n));
         function updateFill() {
           if (!fillEl || !timelineEl) return;
@@ -588,7 +594,6 @@
 
         window.addEventListener("resize", updateFill);
 
-        // Helpers
         function escapeHtml(str) {
           return String(str)
             .replaceAll("&", "&amp;")
