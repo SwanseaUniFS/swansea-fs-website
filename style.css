@@ -1538,3 +1538,144 @@ header nav .nav-item:last-child .nav-link:hover::before {
   .sponsor-name { font-size: 24px; }
   .sponsor-desc { font-size: 16.5px; -webkit-line-clamp: 7; }
 }
+/* =========================
+   Contact Page / Form Styles
+   Matches existing dark + brand blue look
+========================= */
+
+.contact-page {
+  padding-top: clamp(110px, 16vw, 150px); /* keeps header from overlapping */
+  padding-bottom: clamp(28px, 6vw, 70px);
+}
+
+.contact-section {
+  padding: clamp(18px, 3.5vw, 38px) 0;
+}
+
+.contact-card {
+  max-width: 900px;
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+
+  padding: clamp(18px, 3.5vw, 34px);
+}
+
+.contact-title {
+  letter-spacing: 4px;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 46px);
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.contact-intro {
+  margin: 0 auto clamp(16px, 2.6vw, 24px);
+  max-width: 70ch;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+}
+
+/* Grid layout for fields */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 700px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .field--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+
+  padding: 12px 12px;
+  border-radius: 12px;
+
+  outline: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(35, 130, 192, 0.75);
+  box-shadow: 0 0 0 3px rgba(35, 130, 192, 0.18);
+}
+
+/* Submit button matches your pill/brand feel */
+.contact-submit {
+  appearance: none;
+  border: 2px solid #2382c0;
+  background: transparent;
+  color: #2382c0;
+
+  padding: 12px 18px;
+  border-radius: 999px;
+
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+
+  width: fit-content;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+@media (hover: hover) {
+  .contact-submit:hover {
+    transform: translateY(-2px);
+    background: #2382c0;
+    color: #000;
+    box-shadow: 0 0 18px rgba(35, 130, 192, 0.35);
+  }
+}
+
+.contact-submit:active {
+  transform: translateY(0);
+}
+
+.form-message {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
